@@ -10,7 +10,12 @@
 	
 	<properties>
 		<docker.image.prefix>kammana</docker.image.prefix>
+		<!-- Define the Java version to ensure consistency -->
+		<maven.compiler.source>11</maven.compiler.source>  <!-- Change to 17 if using Java 17 -->
+		<maven.compiler.target>11</maven.compiler.target>  <!-- Change to 17 if using Java 17 -->
+		<maven.compiler.release>11</maven.compiler.release> <!-- Ensures cross-compilation is safe -->
 	</properties>	
+	
 	<dependencies>
 		<dependency>
 		    <groupId>com.oracle.bedrock</groupId>
@@ -24,9 +29,8 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
-	
+
 	<distributionManagement>
 		 <snapshotRepository>
 		    <id>nexusRepo</id>
@@ -47,5 +51,18 @@
 	    </pluginRepository>
 	</pluginRepositories>
 
-	
+	<build>
+		<plugins>
+			<!-- Maven Compiler Plugin to define the source and target Java versions -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
